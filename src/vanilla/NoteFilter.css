@@ -1,0 +1,13 @@
+.root {
+  display: inline-block;
+  float: right;
+  border: 2px dashed grey;
+  padding: 1em;
+  margin-left: 1em;
+}
+
+.input {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  width: 20em;
+}
