@@ -57,16 +57,20 @@ module.exports = {
     new HtmlPlugin({
       title: 'React Pets',
       filename: 'index.html',
-      inject: true
+      inject: true,
+      template: `${srcDir}/index.html.ejs`
     }),
 
     new CleanPlugin([distDir]),
 
-    // copy static files into build output directory
     new CopyPlugin([
-      { from: staticDir }
+      { from: staticDir },
+      { from: path.resolve(__dirname, 'node_modules/spectre.css/dist') }
     ]),
   ],
+  resolve: {
+    extensions: ['.jsx', '.js']
+  },
   devServer: {
     contentBase: staticDir,
     port: 3000,
