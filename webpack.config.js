@@ -12,6 +12,7 @@ const HtmlPlugin = require('html-webpack-plugin')
 const srcDir = path.resolve(__dirname, 'src')
 const distDir = path.resolve(__dirname, 'dist')
 const staticDir = path.resolve(__dirname, 'static')
+const moduleDir = path.resolve(__dirname, 'node_modules')
 
 module.exports = {
   context: srcDir,
@@ -25,7 +26,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         include: srcDir,
         use: ['babel-loader']
       },
@@ -42,39 +43,32 @@ module.exports = {
           }
         ]
       },
-
       {
         test: /\.(png|jpg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-          }
-        ]
+        use: ['url-loader']
       }
     ]
   },
   plugins: [
+    new CleanPlugin([distDir]),
+    new CopyPlugin([
+      { from: staticDir },
+      { from: `${moduleDir}/spectre.css/dist`, ignore: '*.min.*' }
+    ]),
     new HtmlPlugin({
       title: 'React Pets',
       filename: 'index.html',
       inject: true,
       template: `${srcDir}/index.html.ejs`
-    }),
-
-    new CleanPlugin([distDir]),
-
-    new CopyPlugin([
-      { from: staticDir },
-      { from: path.resolve(__dirname, 'node_modules/spectre.css/dist') }
-    ]),
+    })
   ],
   resolve: {
-    extensions: ['.jsx', '.js']
+    extensions: ['.js', '.jsx']
   },
+  devtool: 'source-map',
   devServer: {
     contentBase: staticDir,
-    port: 3000,
-    overlay: true
-  },
-  devtool: 'source-map'
+    overlay: true,
+    port: 3000
+  }
 }

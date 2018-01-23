@@ -1,0 +1,15 @@
+/* application specific styles go here */
+#filter-input {
+  border: solid thin #5755D9;
+  border-radius: 2px;
+  height: 2em;
+  width: 100%;
+}
+
+#header {
+  margin: 2em 0;
+}
+
+h1 {
+  text-align: center;
+}
