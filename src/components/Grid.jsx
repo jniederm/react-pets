@@ -2,15 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Card, { PetDataShape } from './Card'
 
-const Grid = ({ pets = [], onRemove }) => (
+const Grid = ({ pets = {}, onRemove }) => (
   <div className='container'>
     <div className='columns'>
 
-      {pets.map(pet => (
-        <div className='column col-3' key={pet.name}>
-          <Card key={pet.name}
-            {...pet}
-            onRemove={() => onRemove(pet.name)} />
+      {Object.keys(pets).map(petId => (
+        <div className='column col-3' key={petId}>
+          <Card key={pets[petId].name}
+            {...pets[petId]}
+            onRemove={() => onRemove(petId)} />
         </div>
       ))}
 
@@ -19,7 +19,7 @@ const Grid = ({ pets = [], onRemove }) => (
 )
 
 Grid.propTypes = {
-  pets: PropTypes.arrayOf(PropTypes.shape({
+  pets: PropTypes.objectOf(PropTypes.shape({
     ...PetDataShape
   })),
   onRemove: PropTypes.func.isRequired

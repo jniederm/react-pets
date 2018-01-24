@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
 import { randomPet } from './utils'
+import { addPet } from '../actions'
 
 const Header = ({ filterText, onFilterChange, onAdd }) => (
   <div className='container' id="header">
@@ -36,4 +39,9 @@ Header.propTypes = {
   onAdd: PropTypes.func.isRequired
 }
 
-export default Header
+export default connect(
+  (state) => ({}),
+  (dispatch) => ({
+    onAdd: (petId) => dispatch(addPet(petId))
+  })
+)(Header)
