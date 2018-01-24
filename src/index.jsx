@@ -1,24 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import loggerMiddleware from 'redux-logger'
 import App from './components/App'
+import rootReducer from './reducers'
 
-// pet names must be unique
-const initialData = [
-  {
-    name: 'Rex',
-    kind: 'dog'
-  },
-  {
-    name: 'Fluffy',
-    kind: 'cat'
-  },
-  {
-    name: 'Destroyer of Worlds',
-    kind: 'hamster'
-  }
-]
+const store = createStore(
+  rootReducer,
+  applyMiddleware(loggerMiddleware)
+)
 
 ReactDOM.render(
-  <App pets={initialData} />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('app')
 )
