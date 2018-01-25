@@ -1,7 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { removePet } from '../actions'
 
 import Header from './Header'
 import Grid from './Grid'
@@ -49,14 +47,12 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  pets: Grid.propTypes.pets,
-  onRemove: PropTypes.func.isRequired,
+  pets: Grid.propTypes.pets
 }
 
 export default connect(
 (state) => ({
   pets: state.pets
 }),
-(dispatch) => ({
-  onRemove: (petId) => dispatch(removePet(petId))
-}))(App)
+(dispatch) => ({})
+)(App)
