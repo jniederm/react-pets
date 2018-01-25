@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { petImageUrl } from './utils'
+import { connect } from 'react-redux'
+import { removePet } from '../actions'
 
-const Card = ({ name, kind, onRemove }) => (
+const Card = ({ name, kind, onRemove, petId }) => (
   <div className='card'>
 
     <div className='card-image'>
@@ -14,7 +16,7 @@ const Card = ({ name, kind, onRemove }) => (
         <div className='card-title h5'>{name}</div>
         <div className='card-subtitle text-gray'>{kind || '(?)'}</div>
       </div>
-      <button className='btn float-right' onClick={onRemove}>
+      <button className='btn float-right' onClick={onRemove.bind(undefined, petId)}>
         <i className='icon icon-delete'></i>
       </button>
     </div>
@@ -29,7 +31,14 @@ export const PetDataShape = {
 
 Card.propTypes = {
   ...PetDataShape,
-  onRemove: PropTypes.func.isRequired
+  onRemove: PropTypes.func.isRequired,
+  petId: PropTypes.string.isRequired
 }
 
-export default Card
+
+export default connect(
+  (state) => ({}),
+  (dispatch) => ({
+    onRemove: (petId) => dispatch(removePet(petId))
+  })
+)(Card)

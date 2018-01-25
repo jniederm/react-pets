@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Card, { PetDataShape } from './Card'
 
-const Grid = ({ pets = {}, onRemove }) => (
+const Grid = ({ pets = {} }) => (
   <div className='container'>
     <div className='columns'>
 
@@ -10,7 +10,7 @@ const Grid = ({ pets = {}, onRemove }) => (
         <div className='column col-3' key={petId}>
           <Card key={pets[petId].name}
             {...pets[petId]}
-            onRemove={() => onRemove(petId)} />
+            petId={petId} />
         </div>
       ))}
 
@@ -21,8 +21,7 @@ const Grid = ({ pets = {}, onRemove }) => (
 Grid.propTypes = {
   pets: PropTypes.objectOf(PropTypes.shape({
     ...PetDataShape
-  })),
-  onRemove: PropTypes.func.isRequired
+  }))
 }
 
 export default Grid
