@@ -15,6 +15,15 @@ const reducers = (state = [], action) => {
       newState.push(action.payload)
       return newState
     }
+    case 'REMOVE_NUMBER': {
+      const index = state.indexOf(action.payload)
+      if (index === -1) {
+        return state
+      }
+      const newState = [].concat(state)
+      newState.splice(index, 1)
+      return newState
+    }
   }
   return state
 }
@@ -45,6 +54,11 @@ store.dispatch({
 store.dispatch({
   type: 'FOO_ACTION',
   payload: 'bar'
+})
+
+store.dispatch({
+  type: 'REMOVE_NUMBER',
+  payload: 3
 })
 
 
