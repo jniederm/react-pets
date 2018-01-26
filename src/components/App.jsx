@@ -21,11 +21,28 @@ class App extends React.Component {
     super(props)
     this.state = {
       filterText: '',
+      pets: props.pets
     }
+    this.maxId = 4
+    this.addPets = this.addPets.bind(this)
+    this.removePets = this.removePets.bind(this)
   }
 
   setFilterText(filterText) {
     this.setState({ filterText })
+  }
+
+  addPets (pet) {
+    const pets = this.state.pets
+    pets[this.maxId] = pet
+    this.maxId++
+    this.setState({ pets })
+  }
+
+  removePets (petId) {
+    const pets = this.state.pets
+    delete pets[petId]
+    this.setState({ pets })
   }
 
   render() {
@@ -34,10 +51,13 @@ class App extends React.Component {
 
         <Header
           filterText={this.state.filterText}
-          onFilterChange={this.setFilterText.bind(this)} />
+          onFilterChange={this.setFilterText.bind(this)}
+          onAdd={this.addPets}
+          />
 
         <Grid
-          pets={filterPets(this.props.pets, this.state.filterText)}
+          pets={filterPets(this.state.pets, this.state.filterText)}
+          onRemove={this.removePets}
           />
 
       </React.Fragment>
