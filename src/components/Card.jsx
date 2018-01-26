@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { petImageUrl } from './utils'
-import { connect } from 'react-redux'
-import { removePet } from '../actions'
 
 const Card = ({ name, kind, onRemove, petId }) => (
   <div className='card'>
@@ -36,9 +34,4 @@ Card.propTypes = {
 }
 
 
-export default connect(
-  (state) => ({}),
-  (dispatch) => ({
-    onRemove: (petId) => dispatch(removePet(petId))
-  })
-)(Card)
+export default Card

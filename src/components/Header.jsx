@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 
 import { randomPet } from './utils'
-import { addPet, fetchEpicPets } from '../actions'
 
-const Header = ({ filterText, onFilterChange, onAdd, onEpic }) => (
+const Header = ({ filterText, onFilterChange, onAdd }) => (
   <div className='container' id="header">
     <div className="columns">
       <div className="column col-12">
@@ -27,10 +25,6 @@ const Header = ({ filterText, onFilterChange, onAdd, onEpic }) => (
           onClick={event => { onAdd(randomPet()) }}>
           <i className='icon icon-plus'></i>
         </button>
-        <button className='btn mx-2'
-          onClick={event => { onEpic() }}>
-          <i className='icon icon-emoji'></i>
-        </button>
       </div>
 
     </div>
@@ -41,13 +35,6 @@ Header.propTypes = {
   filterText: PropTypes.string.isRequired,
   onFilterChange: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
-  onEpic: PropTypes.func.isRequired
 }
 
-export default connect(
-  (state) => ({}),
-  (dispatch) => ({
-    onAdd: (petId) => dispatch(addPet(petId)),
-    onEpic: () => dispatch(fetchEpicPets())
-  })
-)(Header)
+export default Header

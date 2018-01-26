@@ -20,7 +20,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      filterText: ''
+      filterText: '',
     }
   }
 
@@ -38,7 +38,7 @@ class App extends React.Component {
 
         <Grid
           pets={filterPets(this.props.pets, this.state.filterText)}
-          onRemove={this.props.onRemove} />
+          />
 
       </React.Fragment>
     )
@@ -50,9 +50,4 @@ App.propTypes = {
   pets: Grid.propTypes.pets
 }
 
-export default connect(
-(state) => ({
-  pets: state.pets
-}),
-(dispatch) => ({})
-)(App)
+export default App

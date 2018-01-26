@@ -1,24 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import loggerMiddleware from 'redux-logger'
-import { createEpicMiddleware } from 'redux-observable'
-import 'rxjs'
 import App from './components/App'
-import rootReducer from './reducers'
-import rootEpic from './epics'
+import { randomPet } from './components/utils'
 
-const epicMiddleware = createEpicMiddleware(rootEpic)
-
-const store = createStore(
-  rootReducer,
-  applyMiddleware(epicMiddleware, loggerMiddleware)
-)
+const pets = {
+  1: randomPet(),
+  2: randomPet(),
+  3: randomPet()
+}
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <App pets={pets} />,
   document.getElementById('app')
 )
