@@ -31,7 +31,7 @@ const Header = ({ filterText, onFilterChange, onAdd, onEpic, isLoading }) => (
           onClick={event => { onEpic() }}>
           <i className='icon icon-emoji'></i>
         </button>
-        <div className='loading mx-2' id="loader"></div>
+        {isLoading && (<div className='loading mx-2' id="loader"></div>)}
       </div>
 
     </div>

@@ -1,5 +1,7 @@
+import { Observable } from 'rxjs'
+
 import { FETCH_EPIC_PETS } from '../constants'
-import { setPets } from '../actions'
+import { setPets, setLoading } from '../actions'
 
 const epicPets = {
   1: {
@@ -20,10 +22,16 @@ function downloadPets() {
   })
 }
 
-export default (action$) => (
-  action$
+export default (action$) => {
+  const throttledClicks = action$
     .filter(action => action.type === FETCH_EPIC_PETS)
+    .throttleTime(5000)
+  const showLoader = throttledClicks
+    .mapTo(setLoading(true))
+  const loadingDone = throttledClicks
     .map(downloadPets)
     .mergeAll()
-    .map(setPets)
-)
+    .map(loadedPets => [setPets(loadedPets), setLoading(false)])
+    .mergeAll()
+  return Observable.merge(showLoader, loadingDone)
+}
