@@ -1,4 +1,4 @@
-import { ADD_PET, REMOVE_PET, SET_PETS } from '../constants'
+import { ADD_PET, REMOVE_PET, SET_PETS, SET_LOADING } from '../constants'
 
 const initialState = {
   pets: {
@@ -14,7 +14,8 @@ const initialState = {
       name: 'Destroyer of Worlds',
       kind: 'hamster'
     }
-  }
+  },
+  isLoading: false
 }
 
 export default function (state = initialState, action) {
@@ -32,6 +33,8 @@ export default function (state = initialState, action) {
       return newState
     case SET_PETS:
       return Object.assign({}, state, { pets: action.payload })
+    case SET_LOADING:
+      return Object.assign({}, state, { isLoading: action.payload })
     default:
       return state
   }

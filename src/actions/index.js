@@ -1,4 +1,4 @@
-import { ADD_PET, REMOVE_PET, FETCH_EPIC_PETS, SET_PETS } from '../constants'
+import { ADD_PET, REMOVE_PET, FETCH_EPIC_PETS, SET_PETS, SET_LOADING } from '../constants'
 
 export function addPet(pet) {
   return {
@@ -24,5 +24,12 @@ export function setPets(newPets) {
   return {
     type: SET_PETS,
     payload: newPets
+  }
+}
+
+export function setLoading(isLoading) {
+  return {
+    type: SET_LOADING,
+    payload: isLoading
   }
 }
