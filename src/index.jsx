@@ -10,6 +10,6 @@ const pets = {
 }
 
 ReactDOM.render(
-  <App />,
+  <App pets={pets} />,
   document.getElementById('app')
 )
