@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { petImageUrl } from './utils'
 
-const Card = ({ name, kind, onRemove, petId }) => (
+const Card = ({ name, kind, petId }) => (
   <div className='card'>
 
     <div className='card-image'>
@@ -14,7 +14,7 @@ const Card = ({ name, kind, onRemove, petId }) => (
         <div className='card-title h5'>{name}</div>
         <div className='card-subtitle text-gray'>{kind || '(?)'}</div>
       </div>
-      <button className='btn float-right' onClick={onRemove.bind(undefined, petId)}>
+      <button className='btn float-right'>
         <i className='icon icon-delete'></i>
       </button>
     </div>
@@ -29,7 +29,6 @@ export const PetDataShape = {
 
 Card.propTypes = {
   ...PetDataShape,
-  onRemove: PropTypes.func.isRequired,
   petId: PropTypes.string.isRequired
 }
 
